@@ -1,0 +1,48 @@
+<p>
+    Juegos mayoes a <input type="text" [(ngModel)]='filtro'> $
+</p>
+
+
+<h5>Rango de precios</h5>
+<p>
+    Juegos mayores a <input type="text" [(ngModel)]='filtro1'> $ y menores a <input type="text" [(ngModel)]='filtro2'> $
+    <button (click)="visualizarInformacion()">Visualizar</button>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Genero</th>
+            <th>Detalles</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (juego of juegos; track juego) {
+        <tr>
+            @if( juego.id == filtro ){
+            <th scope="row">{{juego.id}}</th>
+            <td>{{juego.nombre}}</td>
+            <td>{{juego.precio}}</td>
+            <td>{{juego.genero}} </td>
+            <td>
+                <button [routerLink]="['/detalle-juegos',juego.id]">Detalles</button>
+            </td>
+            }
+            @else if (mostrarInformacion){
+            @if ( +juego.precio > filtro1 && +juego.precio < filtro2 ){ 
+                <th scope="row">{{juego.id}}</th>
+                <td>{{juego.nombre}}</td>
+                <td>{{juego.precio}}</td>
+                <td>{{juego.genero}} </td>
+                <td>
+                    <button [routerLink]="['/detalle-juegos',juego.id]">Detalles</button>
+                </td>
+                }
+                }
+        </tr>
+        }
+    </tbody>
+</table>
